@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FirstLesson_Kotlin</string>
+    <string name="go_to_the_second">Go to the second</string>
+    <string name="go_to_the_third">Go to the third</string>
+    <string name="go_to_the_fourth">Go to the fourth</string>
+    <string name="this_activity_became_main">This activity became main</string>
 </resources>

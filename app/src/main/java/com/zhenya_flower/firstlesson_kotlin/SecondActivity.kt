@@ -5,14 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 
-class MainActivity : AppCompatActivity() {
+class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_second)
 
-        val btnGoTo = findViewById<Button>(R.id.goToSecond)
+        val btnGoTo = findViewById<Button>(R.id.goToThird)
         btnGoTo.setOnClickListener {
-            startActivity(Intent("com.zhenya_flower.firstlesson_kotlin.OPEN_SECOND_ACTIVITY"))
+            startActivity(
+                Intent(this, ThirdActivity::class.java)
+            )
         }
     }
 }
