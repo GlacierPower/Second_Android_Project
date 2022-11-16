@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/goToSecond"
+    android:title="@string/open_second_activity"/>
+    <item
+        android:id="@+id/changeTitle"
+        android:title="@string/change_title"/>
+    <item
+        android:id="@+id/changeBackground"
+        android:title="@string/change_background_color"/>
+    <item
+        android:id="@+id/about"
+        android:title="@string/about"/>
+</menu>

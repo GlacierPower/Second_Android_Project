@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">FirstLesson_Kotlin</string>
+    <string name="open_second_activity">Open second activity</string>
+    <string name="change_title">Change title</string>
+    <string name="change_background_color">Change background color</string>
+    <string name="about">About</string>
+    <string name="message">Just dance, gonna be okay, da da doo-doo-mmm</string>
+    <string name="secondMessage">Just dance,spin that record,baby,da da doo-doo-mmm</string>
+    <string name="no_data">No data</string>
+    <string name="mes">First message</string>
+    <string name="secMes">Second message</string>
+    <string name="title">Clicked second item</string>
+    <string name="defaultTitle">Homework Menu</string>
+    <string name="aboutTitle">About</string>
+    <string name="version_1_0_by_glacier_power">Version : 1.0 By Glacier Power</string>
+
+
 </resources>
