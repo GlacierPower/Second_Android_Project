@@ -1,33 +1,50 @@
 package com.zhenya_flower.firstlesson_kotlin
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Context
-import android.content.Intent
+
+
+
+
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+
 
 // i'LL fix it
 class About : DialogFragment() {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            builder.setTitle("ABOUT")
-                .setMessage("Version 1.0" +
-                        "By Glacier Power")
-                .setPositiveButton("Cancel") {
-                        dialog, _ ->  dialog.cancel()
-                }
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return (inflater.inflate(R.layout.about, container, false))
     }
 
+    override fun onStart() {
 
-    companion object {
-        fun startAbout(context: Context) {
-            val intent = Intent(context, About::class.java)
-            context.startActivity(intent)
+        val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
+        val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
+        dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+        super.onStart()
+    }
+
+    companion object{
+        fun startAbout(manager:FragmentManager){
+            val myDialogFragment = About()
+            val btnOk = myDialogFragment.dialog?.findViewById<Button>(R.id.cancel)
+                myDialogFragment.show(manager, "myDialog")
+            btnOk?.setOnClickListener {
+                myDialogFragment.dialog?.onBackPressed()
+            }
+
         }
     }
+
 }
+
+
+

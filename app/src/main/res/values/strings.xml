@@ -13,6 +13,8 @@
     <string name="defaultTitle">Homework Menu</string>
     <string name="aboutTitle">About</string>
     <string name="version_1_0_by_glacier_power">Version : 1.0 By Glacier Power</string>
+    <string name="ok">OK</string>
+    <string name="fragAbout">ABOUT</string>
 
 
 </resources>
