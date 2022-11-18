@@ -2,21 +2,20 @@ package com.zhenya_flower.firstlesson_kotlin
 
 
 
-
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 
 
 // i'LL fix it
 class About : DialogFragment() {
-
     override fun onCreateView(
+
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,14 +32,13 @@ class About : DialogFragment() {
     }
 
     companion object{
-        fun startAbout(manager:FragmentManager){
-            val myDialogFragment = About()
-            val btnOk = myDialogFragment.dialog?.findViewById<Button>(R.id.cancel)
-                myDialogFragment.show(manager, "myDialog")
-            btnOk?.setOnClickListener {
-                myDialogFragment.dialog?.onBackPressed()
+        private val myDialogFragment = About()
+        fun startAbout(manager: FragmentManager) {
+            myDialogFragment.show(manager, "myDialog")
+            val btn = myDialogFragment.dialog?.findViewById<Button>(R.id.cancel)
+                btn?.setOnClickListener {
+                myDialogFragment.dismiss()
             }
-
         }
     }
 
