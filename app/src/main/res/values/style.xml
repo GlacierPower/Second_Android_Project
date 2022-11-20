@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/design_default_color_primary</item>
+        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="colorAccent">@color/design_default_color_primary_variant</item>
+        <item name="textAppearanceButton">@style/TextAppearance.AppCompat.Button</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.SmallComponent
+        </item>
+    </style>
+
+    <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ShapeAppearance.App.SmallComponents" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">20sp</item>
+    </style>
+
+
+</resources>
