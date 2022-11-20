@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val inputEmail = findViewById<TextInputLayout>(R.id.inputEmail)
-        val inputPass = findViewById<TextInputLayout>(R.id.inputPass)
+        val layoutEmail = findViewById<TextInputLayout>(R.id.inputEmail)
+        val layoutPass = findViewById<TextInputLayout>(R.id.inputPass)
         val email = findViewById<EditText>(R.id.email)
         val pass = findViewById<EditText>(R.id.password)
         pass.setSelection(0)
@@ -36,14 +36,14 @@ class MainActivity : AppCompatActivity() {
 
             } else {
                 if (email.text.isEmpty() || email.text.contains(" ")) {
-                    inputEmail.helperText = "Email can't be empty or contain spaces"
-                    inputEmail.setEndIconDrawable(R.drawable.error)
-                    inputEmail.boxStrokeErrorColor = getColorStateList(R.color.error)
+                    layoutEmail.helperText = "Email can't be empty or contain spaces"
+                    layoutEmail.setEndIconDrawable(R.drawable.error)
+                    layoutEmail.boxStrokeErrorColor = getColorStateList(R.color.error)
                 }
                 if (pass.text.isEmpty() || pass.text.contains(" ")) {
-                    inputPass.helperText = "Password can't be empty or contain spaces"
-                    inputPass.setEndIconDrawable(R.drawable.error)
-                    inputPass.boxStrokeErrorColor = getColorStateList(R.color.error)
+                    layoutPass.helperText = "Password can't be empty or contain spaces"
+                    layoutPass.setEndIconDrawable(R.drawable.error)
+                    layoutPass.boxStrokeErrorColor = getColorStateList(R.color.error)
                 }
             }
         }
