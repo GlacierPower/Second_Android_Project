@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         val layoutEmail = findViewById<TextInputLayout>(R.id.inputEmail)
         val layoutPass = findViewById<TextInputLayout>(R.id.inputPass)
         val email = findViewById<EditText>(R.id.email)
+        layoutEmail.setStartIconDrawable(R.drawable.person)
+        layoutPass.setStartIconDrawable(R.drawable.lock)
         val pass = findViewById<EditText>(R.id.password)
         pass.setSelection(0)
         val btn = findViewById<Button>(R.id.materialButton)
@@ -37,11 +40,14 @@ class MainActivity : AppCompatActivity() {
             } else {
                 if (email.text.isEmpty() || email.text.contains(" ")) {
                     layoutEmail.helperText = "Email can't be empty or contain spaces"
-                    layoutEmail.setEndIconDrawable(R.drawable.error)
+                    layoutEmail.setHelperTextColor(getColorStateList(R.color.error))
+                    layoutEmail.endIconDrawable = AppCompatResources
+                        .getDrawable(this, R.color.error)
                     layoutEmail.boxStrokeErrorColor = getColorStateList(R.color.error)
                 }
                 if (pass.text.isEmpty() || pass.text.contains(" ")) {
                     layoutPass.helperText = "Password can't be empty or contain spaces"
+                    layoutPass.setHelperTextColor(getColorStateList(R.color.error))
                     layoutPass.setEndIconDrawable(R.drawable.error)
                     layoutPass.boxStrokeErrorColor = getColorStateList(R.color.error)
                 }
