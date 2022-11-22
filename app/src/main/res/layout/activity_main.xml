@@ -10,7 +10,7 @@
         android:id="@+id/inputEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="370dp"
-        android:layout_height="70dp"
+        android:layout_height="75dp"
         android:layout_marginTop="20dp"
         android:hint="@string/enter_your_email"
         app:errorEnabled="true"
@@ -22,7 +22,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:inputType="text|textCapSentences"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -31,8 +31,8 @@
         android:id="@+id/inputPass"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="370dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="5dp"
         android:hint="@string/enter_password"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
@@ -45,7 +45,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,7 +54,7 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:text="@string/login"
         app:icon="@drawable/log"
         app:iconGravity="textEnd"
