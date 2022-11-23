@@ -98,7 +98,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:hapticFeedbackEnabled="false"
-        app:boxStrokeColor="@color/hint"
         android:text="@string/login"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/white"
@@ -106,6 +105,7 @@
         android:textStyle="bold"
         app:backgroundTint="@color/button"
         app:backgroundTintMode="screen"
+        app:boxStrokeColor="@color/hint"
         app:cornerRadius="100dp"
         app:iconGravity="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,13 +137,14 @@
             app:cardCornerRadius="50dp">
 
             <ImageView
-                android:contentDescription="@string/facebook"
                 android:id="@+id/facebookView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:contentDescription="@string/facebook"
                 android:scaleType="centerCrop"
                 android:src="@drawable/facebook" />
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -154,14 +155,15 @@
             app:cardCornerRadius="50dp">
 
             <ImageView
-                android:contentDescription="@string/google"
                 android:id="@+id/googleView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:contentDescription="@string/google"
                 android:scaleType="centerCrop"
                 android:src="@drawable/search" />
         </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
@@ -173,4 +175,5 @@
         android:text="@string/sing_up"
         android:textSize="18sp"
         android:textStyle="bold" />
+
 </LinearLayout>

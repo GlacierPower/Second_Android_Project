@@ -12,4 +12,5 @@
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark theme</string>
     <string name="radio_btn">Radio buttons</string>
+    <string name="toast">Toast</string>
 </resources>
