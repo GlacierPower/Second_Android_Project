@@ -25,11 +25,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:clipToOutline="true"
         android:layout_width="300dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:hint="@string/enter_email"
+        android:outlineSpotShadowColor="@color/black"
         app:boxBackgroundMode="filled"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopStart="100dp"
@@ -137,7 +139,7 @@
             app:cardCornerRadius="50dp">
 
             <ImageView
-                android:contentDescription="@string/facebook"
+                android:contentDescription="@string/enter_email"
                 android:id="@+id/facebookView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -154,7 +156,6 @@
             app:cardCornerRadius="50dp">
 
             <ImageView
-                android:contentDescription="@string/google"
                 android:id="@+id/googleView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

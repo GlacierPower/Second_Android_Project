@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">FirstLesson_Kotlin</string>
+    <string name="app_name">Login</string>
+    <string name="login">SIGN IN</string>
+    <string name="enter_password">password</string>
+    <string name="enter_email">username or email</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or_login_with">Or login with</string>
+    <string name="sing_up">Sing Up</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+    <string name="radio">Radio buttons</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="radio_btn">Radio buttons</string>
 </resources>
