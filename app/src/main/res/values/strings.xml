@@ -19,4 +19,8 @@
     <string name="user_not_found">No user found with this email.</string>
     <string name="ent_email">Enter Email</string>
     <string name="ent_pass">Enter password</string>
+    <string name="first_name">First Name :</string>
+    <string name="last_name">Last Name :</string>
+    <string name="user_email">User Email :</string>
+    <string name="email_verified">Email Verified :</string>
 </resources>

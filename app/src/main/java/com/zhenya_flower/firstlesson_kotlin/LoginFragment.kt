@@ -20,8 +20,8 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var singUpText: TextView
     private lateinit var forgotPass: TextView
-    private lateinit var layoutEmail: TextInputLayout
-    private lateinit var layoutPass: TextInputLayout
+    private lateinit var layoutEmailLogin: TextInputLayout
+    private lateinit var layoutPassLogin: TextInputLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +37,8 @@ class LoginFragment : Fragment() {
         btnLogin = view.findViewById(R.id.btn_login)
         etEmail = view.findViewById(R.id.email)
         etPass = view.findViewById(R.id.password)
-        layoutEmail = view.findViewById(R.id.layoutEmail)
-        layoutPass = view.findViewById(R.id.layoutPassword)
+        layoutEmailLogin = view.findViewById(R.id.layoutEmail)
+        layoutPassLogin = view.findViewById(R.id.layoutPassword)
         auth = FirebaseAuth.getInstance()
 
 
@@ -70,8 +70,6 @@ class LoginFragment : Fragment() {
                             .replace(R.id.activityContainer, MainFragment())
                             .commit()
                     } else {
-                        layoutEmail.helperText = "Enter email"
-                        layoutPass.helperText = "Enter password"
                         view?.showsnackBar("Authentication failed.")
                     }
                 }

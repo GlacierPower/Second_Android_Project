@@ -35,10 +35,10 @@ class ForgotPassFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun resetPass() {
-        val email = etEmail?.text.toString()
+    private fun resetPass() {
+        val email = etEmail.text.toString()
         if (!TextUtils.isEmpty(email)) {
-            auth!!
+            auth
                 .sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

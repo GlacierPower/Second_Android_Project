@@ -1,7 +1,6 @@
 package com.zhenya_flower.firstlesson_kotlin
 
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import androidx.core.app.NotificationCompat.getColor
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
@@ -29,6 +27,7 @@ class RegistrationFragment : Fragment() {
     private lateinit var layoutEmail: TextInputLayout
     private lateinit var layoutPass: TextInputLayout
     private lateinit var layoutConfirm: TextInputLayout
+
 
 
     override fun onCreateView(
@@ -52,22 +51,25 @@ class RegistrationFragment : Fragment() {
         layoutConfirm = view.findViewById(R.id.layoutConfirm)
         auth = Firebase.auth
 
-
-        btnSingUp.setOnClickListener {
-            singUpUser()
+        btnCheck.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                btnSingUp.setOnClickListener {
+                    singUpUser()
+                }
+            } else
+                view.showsnackBar("You should agree to the Terms")
         }
 
     }
+
 
     private fun singUpUser() {
         val email = etEmail.text.toString()
         val pass = etPass.text.toString()
         val confirmPassword = etConfirm.text.toString()
 
+
         if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank()) {
-            layoutEmail.helperText = "Enter email"
-            layoutConfirm.helperText = "Confirm password"
-            layoutPass.helperText = "Enter password"
             view?.showsnackBar("Email and Password can't be blank")
             return
         }
@@ -75,7 +77,7 @@ class RegistrationFragment : Fragment() {
             view?.showsnackBar("Password and Confirm Password do not match")
             return
         }
-        auth.createUserWithEmailAndPassword(email!!, pass!!)
+        auth.createUserWithEmailAndPassword(email, pass)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     view?.showsnackBar("User account registered")
@@ -83,7 +85,7 @@ class RegistrationFragment : Fragment() {
                         .beginTransaction()
                         .add(R.id.activityContainer, LoginFragment())
                         .commit()
-//                        verifyEmail()
+                        verifyEmail()
 
                 } else {
                     view?.showsnackBar("Singed Up Failed!")
@@ -91,19 +93,18 @@ class RegistrationFragment : Fragment() {
             }
 
     }
-//        private fun verifyEmail() {
-//            val mUser = com.zhenya_flower.firstlesson_kotlin.auth.currentUser;
-//            mUser!!.sendEmailVerification()
-//                .addOnCompleteListener{ task ->
-//                    if (task.isSuccessful) {
-//                        view?.showsnackBar("Verification email sent to " + mUser.email)
-//
-//                    } else {
-//                        Log.e(TAG, "sendEmailVerification", task.exception)
-//                        view?.showsnackBar("Failed to send verification email.")
-//                    }
-//                }
-//        }
+        private fun verifyEmail() {
+            val user = auth.currentUser
+            user!!.sendEmailVerification()
+                .addOnCompleteListener{ task ->
+                    if (task.isSuccessful) {
+                        view?.showsnackBar("Verification email sent to " + user.email)
+
+                    } else {
+                        view?.showsnackBar("Failed to send verification email.")
+                    }
+                }
+        }
 }
 
 fun View.showsnackBar(message: String) {
