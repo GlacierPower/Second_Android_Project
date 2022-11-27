@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "577174392996",
+    "project_id": "second-android-project",
+    "storage_bucket": "second-android-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577174392996:android:ce4684999e1f054198d631",
+        "android_client_info": {
+          "package_name": "com.zhenya_flower.firstlesson_kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577174392996-p0uljhc5gh8e66j4ef9lavfcdkopk3k9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsEFdQGgny-sZ1sUm_ECceNhKwJkKMoBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577174392996-p0uljhc5gh8e66j4ef9lavfcdkopk3k9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
