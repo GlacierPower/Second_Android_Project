@@ -13,4 +13,10 @@
     <string name="i_agree_to_the_terms">I agree to the Terms</string>
     <string name="already_have_an_account">Already have an account</string>
     <string name="welcome_to_main_fragment">Welcome to Main Fragment</string>
+    <string name="send_password_reset_email">Send password reset email</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="email_sent">Email sent.</string>
+    <string name="user_not_found">No user found with this email.</string>
+    <string name="ent_email">Enter Email</string>
+    <string name="ent_pass">Enter password</string>
 </resources>
