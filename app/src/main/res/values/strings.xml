@@ -12,4 +12,5 @@
     <string name="confirm_password">Confirm password</string>
     <string name="i_agree_to_the_terms">I agree to the Terms</string>
     <string name="already_have_an_account">Already have an account</string>
+    <string name="welcome_to_main_fragment">Welcome to Main Fragment</string>
 </resources>

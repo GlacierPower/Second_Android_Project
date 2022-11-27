@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
@@ -27,19 +28,17 @@ class LoginFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         singUpText = view.findViewById(R.id.sign_up)
         btnLogin = view.findViewById(R.id.btn_login)
         etEmail = view.findViewById(R.id.email)
-        etPass= view.findViewById(R.id.password)
+        etPass = view.findViewById(R.id.password)
         auth = FirebaseAuth.getInstance()
 
 
         btnLogin.setOnClickListener {
             login()
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.activityContainer, MainFragment())
-                .commit()
+
         }
         singUpText.setOnClickListener {
             parentFragmentManager
@@ -47,18 +46,22 @@ class LoginFragment : Fragment() {
                 .add(R.id.activityContainer, RegistrationFragment())
                 .commit()
         }
-        super.onViewCreated(view, savedInstanceState)
+
     }
-    private fun login(){
+
+    private fun login() {
         val email = etEmail.text.toString()
         val pass = etPass.text.toString()
 
-        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener() {
-            if (it.isSuccessful) {
-                Toast.makeText(view?.context, "Successfully LoggedIn",
-                    Toast.LENGTH_SHORT).show()
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+            if (task.isSuccessful || email.isNotBlank() || pass.isNotBlank()) {
+                view?.showsnackBar("Successfully LoggedIn")
+                parentFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activityContainer, MainFragment())
+                    .commit()
             } else
-                Toast.makeText(view?.context, "Log In failed ", Toast.LENGTH_SHORT).show()
+                view?.showsnackBar("Log In failed ")
         }
     }
 
