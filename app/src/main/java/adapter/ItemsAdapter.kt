@@ -2,6 +2,7 @@ package adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.zhenya_flower.firstlesson_kotlin.R
 import listener.ItemsListener
@@ -23,7 +24,10 @@ class ItemsAdapter(private  val itemListener: ItemsListener
     }
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
+        holder.itemView.animation = AnimationUtils
+            .loadAnimation(holder.itemView.context, R.anim.amim_recycler)
         holder.bind(listItems[position])
+
     }
 
     override fun getItemCount(): Int {
