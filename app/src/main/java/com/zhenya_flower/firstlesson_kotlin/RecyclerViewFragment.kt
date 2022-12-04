@@ -6,16 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import listener.ItemsListener
-import model.ItemsModel
-import java.text.SimpleDateFormat
-import java.util.*
+
+import view_models.RecyclerViewModel
+
 
 class RecyclerViewFragment : Fragment(), ItemsListener {
 
     private lateinit var itemsAdapter: ItemsAdapter
+
+    private val viewModel: RecyclerViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,45 +36,30 @@ class RecyclerViewFragment : Fragment(), ItemsListener {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = itemsAdapter
 
-        val format = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        val currentDate = format.format(Date())
-        val listItems = listOf<ItemsModel>(
-            ItemsModel(R.drawable.acura, "CDX", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.cadil, "Escalade", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.chev, "Corvet", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.honda, "Civic", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.hyn, "Accent", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.lada, "Vesta", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.lexus, "LX", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.mabyh, "Exelero", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.mazda, "6", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.reno, "Laguna", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.rover, "75", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.shcoda, "Octavia", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.subaru, "Impreza", currentDate, R.drawable.first_star),
-            ItemsModel(R.drawable.volk, "Polo", currentDate, R.drawable.first_star)
-        )
-        itemsAdapter.submitList(listItems.toList())
+        viewModel.getData()
+        viewModel.car.observe(viewLifecycleOwner) { carsList ->
+            itemsAdapter.submitList(carsList)
+        }
+
+        viewModel.bundle.observe(viewLifecycleOwner) { bundleNav ->
+            val detailsFragment = DetailsFragment()
+            val bundle = Bundle()
+
+            bundle.putString("name", bundleNav.name)
+            bundle.putString("date", bundleNav.date)
+            bundle.putInt("imageView", bundleNav.image)
+            detailsFragment.arguments = bundle
+            parentFragmentManager
+                .beginTransaction()
+                .replace(R.id.activityContainer, detailsFragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
-    override fun onClick() {
-
-    }
+    override fun onClick() {}
 
     override fun onItemSelected(name: String, date: String, imageView: Int) {
-        val detailsFragment = DetailsFragment()
-        val bundle = Bundle()
-
-        bundle.putString("name", name)
-        bundle.putString("date", date)
-        bundle.putInt("imageView", imageView)
-        detailsFragment.arguments = bundle
-        parentFragmentManager
-            .beginTransaction()
-            .replace(R.id.activityContainer, detailsFragment)
-            .addToBackStack(null)
-            .commit()
+        viewModel.bundleNavi(name, date, imageView)
     }
-
-
 }

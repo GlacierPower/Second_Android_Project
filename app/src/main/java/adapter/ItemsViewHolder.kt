@@ -22,7 +22,6 @@ class ItemsViewHolder(
         imageView.setBackgroundResource(itemsModel.image)
         date.text = itemsModel.date
         favImage.setBackgroundResource(itemsModel.favImage)
-
         favImage.setOnClickListener {
             if (itemsModel.favImage == R.drawable.first_star) {
                 favImage.setBackgroundResource(R.drawable.second_star)
