@@ -1,15 +1,15 @@
 package com.zhenya_flower.firstlesson_kotlin
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import companion.Const
 
 class DetailsFragment : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,10 +27,10 @@ class DetailsFragment : Fragment() {
         val detailsImage = view.findViewById<ImageView>(R.id.detImage)
 
         val bundle = arguments
-        bundle?.let { safeBundle->
-            val name = safeBundle.getString("name")
-            val date= safeBundle.getString("date")
-            val image = safeBundle.getInt("imageView")
+        bundle?.let { safeBundle ->
+            val name = safeBundle.getString(Const.name)
+            val date = safeBundle.getString(Const.date)
+            val image = safeBundle.getInt(Const.image)
 
             detailsName.text = name
             detailsDate.text = date
