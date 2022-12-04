@@ -1,8 +1,10 @@
 package view_models
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.zhenya_flower.firstlesson_kotlin.R
 import model.ItemsModel
@@ -51,9 +53,11 @@ class RecyclerViewModel : ViewModel() {
 
 }
 
+
 data class BundleNavigation(
     val image: Int,
     val name: String,
     val date: String
 
 )
+

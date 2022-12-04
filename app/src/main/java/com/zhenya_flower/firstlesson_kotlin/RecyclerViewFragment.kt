@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import companion.Const
 import listener.ItemsListener
-
 import view_models.RecyclerViewModel
+
 
 
 class RecyclerViewFragment : Fragment(), ItemsListener {
@@ -54,6 +54,7 @@ class RecyclerViewFragment : Fragment(), ItemsListener {
                 .replace(R.id.activityContainer, detailsFragment)
                 .addToBackStack(null)
                 .commit()
+
         }
     }
 
@@ -62,6 +63,5 @@ class RecyclerViewFragment : Fragment(), ItemsListener {
     override fun onItemSelected(name: String, date: String, imageView: Int) {
         viewModel.bundleNavi(name, date, imageView)
     }
-
 
 }
