@@ -5,11 +5,10 @@ import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+
 
 private lateinit var auth: FirebaseAuth
-private var mDatabaseReference: DatabaseReference? = null
-private var mDatabase: FirebaseDatabase? = null
+
 
 private lateinit var tvEmail: TextView
 private lateinit var tvEmailVerifiied: TextView
@@ -18,15 +17,9 @@ class MainFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val mUser = auth.currentUser
-        val mUserReference = mDatabaseReference!!.child(mUser!!.uid)
-        tvEmail.text = mUser.email
-        tvEmailVerifiied.text = mUser.isEmailVerified.toString()
-        mUserReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-            }
+        tvEmail.text = mUser?.email
+        tvEmailVerifiied.text = mUser?.isEmailVerified.toString()
 
-            override fun onCancelled(databaseError: DatabaseError) {}
-        })
     }
 
     override fun onCreateView(
@@ -43,7 +36,6 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initialise()
         auth = FirebaseAuth.getInstance()
         super.onViewCreated(view, savedInstanceState)
     }
@@ -68,11 +60,4 @@ class MainFragment : Fragment() {
             .commit()
     }
 
-    private fun initialise() {
-        mDatabase = FirebaseDatabase.getInstance()
-        mDatabaseReference = mDatabase!!.reference.child("Users")
-        auth = FirebaseAuth.getInstance()
-        tvEmail = view?.findViewById(R.id.tv_email)!!
-        tvEmailVerifiied = view?.findViewById(R.id.tv_email_verifiied)!!
-    }
 }
