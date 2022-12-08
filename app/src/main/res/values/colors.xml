@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="backCard">#158560</color>
     <color name="backContr">#92DC0B</color>
+    <color name="errorColor">#FF0000</color>
 </resources>

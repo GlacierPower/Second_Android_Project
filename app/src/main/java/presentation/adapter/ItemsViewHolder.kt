@@ -1,11 +1,11 @@
-package adapter
+package presentation.adapter
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zhenya_flower.firstlesson_kotlin.R
-import listener.ItemsListener
+import presentation.adapter.listener.ItemsListener
 import model.ItemsModel
 
 class ItemsViewHolder(
