@@ -23,4 +23,17 @@
     <string name="last_name">Last Name :</string>
     <string name="user_email">User Email :</string>
     <string name="email_verified">Email Verified :</string>
+    <string name="enter_username">Enter username</string>
+    <string name="or_sign_up_using">Or Sign Up Using</string>
+    <string name="log_fail">Login failed</string>
+    <string name="empty_email">Email can\'t empty</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="pass_empty">Password can\'t be empty</string>
+    <string name="username_empty">Username can\'t be empty</string>
+    <string name="pass_short">Password too short</string>
+    <string name="paa_not_match">Password not match</string>
+    <string name="confirm_pass_empty">Confirm password empty</string>
+    <string name="ref_fail">Registration failed</string>
+    <string name="logout_succ">Logout succeed</string>
+    <string name="logout_failed">Logout failed</string>
 </resources>

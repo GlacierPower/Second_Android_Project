@@ -1,7 +1,9 @@
-package com.zhenya_flower.firstlesson_kotlin
+package presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.zhenya_flower.firstlesson_kotlin.R
+import presentation.login.LoginFragment
 
 
 class MainActivity : AppCompatActivity() {

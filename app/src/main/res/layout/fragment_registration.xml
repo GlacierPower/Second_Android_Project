@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:accessibilityPaneTitle="@string/sing_up"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:accessibilityPaneTitle="@string/sing_up"
     android:background="@color/white"
+    android:id="@+id/rootView"
     tools:context=".RegistrationFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -41,12 +42,41 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textLogin"
+        app:startIconDrawable="@drawable/email">
+
+        <EditText
+            android:id="@+id/emailRegister"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:layout_height="60dp"
+            android:textColorHint="#757575" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutUserName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="5dp"
+        android:autofillHints="password"
+        android:hint="@string/enter_username"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeErrorColor="@color/errorColor"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/errorColor"
+        app:hintTextColor="@color/hintColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutEmailRegister"
         app:startIconDrawable="@drawable/user">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailRegister"
+            android:id="@+id/userNameRegister"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:password="false"
             android:textColorHint="#757575" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,17 +88,18 @@
         android:layout_marginTop="5dp"
         android:autofillHints="password"
         android:hint="@string/ent_pass"
-        app:helperTextTextColor="@color/errorColor"
         app:boxStrokeColor="@color/black"
         app:boxStrokeErrorColor="@color/errorColor"
         app:boxStrokeWidthFocused="@dimen/cardview_compat_inset_shadow"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/errorColor"
         app:hintTextColor="@color/hintColor"
+        app:layout_constraintBottom_toTopOf="@+id/layoutConfirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutEmailRegister"
+        app:layout_constraintTop_toBottomOf="@+id/layoutUserName"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/lock">
 
@@ -88,13 +119,14 @@
         android:layout_marginTop="95dp"
         android:autofillHints="password"
         android:hint="@string/confirm_password"
-        app:helperTextTextColor="@color/errorColor"
         app:boxStrokeColor="@color/black"
         app:boxStrokeErrorColor="@color/errorColor"
         app:boxStrokeWidthFocused="@dimen/cardview_compat_inset_shadow"
         app:errorEnabled="true"
         app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/errorColor"
         app:hintTextColor="@color/hintColor"
+        app:layout_constraintBottom_toTopOf="@+id/btn_registration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,6 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/i_agree_to_the_terms"
+        app:layout_constraintBottom_toTopOf="@+id/btn_registration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutConfirm" />
