@@ -6,9 +6,11 @@ import application.model.User
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
-class RegisterRepositoryImpl @Inject constructor() : RegistrationRepository {
+class RegisterRepositoryImpl @Inject constructor(
 
-    override fun registerUser(user: User, listener: AuthRepositoryCallBack, auth: FirebaseAuth) {
+) : RegistrationRepository {
+
+    override fun registerUser(user: User, auth: FirebaseAuth, listener: AuthRepositoryCallBack) {
         auth
             .createUserWithEmailAndPassword(user.email as String, user.password as String)
             .addOnCompleteListener { task ->
@@ -20,29 +22,20 @@ class RegisterRepositoryImpl @Inject constructor() : RegistrationRepository {
                         confirmPassword = null
                     )
                     listener.success(newUser)
-                    val user = auth.currentUser
-                    user!!.sendEmailVerification()
-                        .addOnCompleteListener { task ->
+                    auth.currentUser?.sendEmailVerification()
+                        ?.addOnCompleteListener { task ->
                             if (task.isSuccessful) {
+
+                            } else {
+
                             }
+                            auth.signOut()
                         }
-                } else {
-                    listener.fail(task.exception?.message)
                 }
             }
+
     }
 
-    override fun verifyEmail(auth: FirebaseAuth) {
-        val user = auth.currentUser
-        user!!.sendEmailVerification()
-            .addOnCompleteListener { task->
-                if (task.isSuccessful){
-
-                }else{
-
-                }
-            }
-    }
 }
 
 

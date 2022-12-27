@@ -7,6 +7,8 @@ import application.data.logout.LogoutRepositoryImpl
 import application.domain.logout.LogoutInteractor
 import application.presentation.login.LoginFragment
 import application.untils.AppConstants.showsnackBar
+import application.untils.NavigationOnFragment.replaceFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.zhenya_flower.firstlesson_kotlin.R
 import com.zhenya_flower.firstlesson_kotlin.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,16 +17,24 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment(), LogoutView {
 
     private lateinit var logoutPresenter: LogoutPresenter
-    private lateinit var pageListener: application.presentation.AuthenticationPageListener
 
     private var _viewBinding: FragmentMainBinding? = null
-    private val viewBinding get() = _viewBinding
+    private val viewBinding get() = _viewBinding!!
+
+    override fun onStart() {
+        super.onStart()
+        val auth = FirebaseAuth.getInstance()
+        val mUser = auth.currentUser
+        viewBinding.tvEmail.text = mUser?.email
+        viewBinding.tvEmailVerifiied.text = mUser?.isEmailVerified.toString()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _viewBinding = FragmentMainBinding.inflate(inflater)
-        return viewBinding?.root
+        return viewBinding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,10 +59,11 @@ class MainFragment : Fragment(), LogoutView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.log_out) {
             logoutPresenter.logOut()
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.activityContainer, LoginFragment())
-                .commit()
+            replaceFragment(
+                parentFragmentManager,
+                LoginFragment(),
+                false
+            )
         }
         return super.onOptionsItemSelected(item)
     }

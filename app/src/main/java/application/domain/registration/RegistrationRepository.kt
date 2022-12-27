@@ -8,10 +8,8 @@ interface RegistrationRepository {
 
     fun registerUser(
         user: User,
-        listener : AuthRepositoryCallBack,
         auth: FirebaseAuth,
+        listener :AuthRepositoryCallBack
     )
-    fun verifyEmail(
-        auth: FirebaseAuth
-    )
+
 }

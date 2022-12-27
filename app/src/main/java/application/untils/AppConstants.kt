@@ -1,12 +1,22 @@
 package application.untils
 
+import android.content.Context
+import android.util.Patterns
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 
 object AppConstants {
     fun View.showsnackBar(message: String) {
-        Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(rootView, message ?: "empty", Snackbar.LENGTH_SHORT).show()
     }
+
+    fun Context.hideSoftInput(view: View) {
+        val im = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        im.hideSoftInputFromWindow(view.windowToken, InputMethodManager.RESULT_UNCHANGED_SHOWN)
+    }
+
+    fun String.isEmailValid() = this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 }

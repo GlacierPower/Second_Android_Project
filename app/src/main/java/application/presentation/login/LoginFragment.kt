@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import application.data.login.LoginRepositoryImpl
-import application.domain.login.LoginInteractor
 import application.model.User
+import application.presentation.AuthenticationPageListener
+import application.presentation.forgot_pass.ForgotPassFragment
+import application.presentation.logout.MainFragment
 import application.presentation.registration.RegistrationFragment
 import application.untils.AppConstants.showsnackBar
+import application.untils.NavigationOnFragment.replaceFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.zhenya_flower.firstlesson_kotlin.R
 import com.zhenya_flower.firstlesson_kotlin.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,9 +23,9 @@ import javax.inject.Inject
 class LoginFragment : Fragment(), LoginView {
 
     private var _viewBinding: FragmentLoginBinding? = null
-    private val viewBinding get() = _viewBinding
+    private val viewBinding get() = _viewBinding!!
 
-    private lateinit var pageListener: application.presentation.AuthenticationPageListener
+    private lateinit var pageListener: AuthenticationPageListener
 
     @Inject
     lateinit var loginPresenter: LoginPresenter
@@ -30,33 +33,30 @@ class LoginFragment : Fragment(), LoginView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _viewBinding = FragmentLoginBinding.inflate(inflater)
-        return viewBinding?.root
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loginPresenter.setView(this)
 
-
-        loginPresenter = LoginPresenter(
-            LoginInteractor(LoginRepositoryImpl())
-        )
-        viewBinding?.btnLogin?.setOnClickListener {
+        viewBinding.btnLogin.setOnClickListener {
             val user = User(
-                email = viewBinding?.email?.text.toString().trim(),
-                password = viewBinding?.password?.text.toString().trim()
+                email = viewBinding.email.text.toString().trim(),
+                password = viewBinding.password.text.toString().trim()
             )
+
             loginPresenter.doLogin(user)
-//            replaceFragment(parentFragmentManager, MainFragment(), false)
 
         }
-        viewBinding?.signUp?.setOnClickListener {
+        viewBinding.signUp.setOnClickListener {
             singUp()
         }
 
-        viewBinding?.forgotPass?.setOnClickListener {
+        viewBinding.forgotPass.setOnClickListener {
             forgotPass()
         }
 
@@ -64,43 +64,65 @@ class LoginFragment : Fragment(), LoginView {
 
 
     private fun singUp() {
-        parentFragmentManager
-            .beginTransaction()
-            .add(R.id.activityContainer, RegistrationFragment())
-            .addToBackStack("add")
-            .commit()
+        replaceFragment(
+            parentFragmentManager,
+            RegistrationFragment(),
+            true
+        )
+
     }
 
     private fun forgotPass() {
-        parentFragmentManager
-            .beginTransaction()
-            .add(R.id.activityContainer, application.presentation.forgot_pass.ForgotPassFragment())
-            .addToBackStack("add")
-            .commit()
+        replaceFragment(
+            parentFragmentManager,
+            ForgotPassFragment(),
+            true
+        )
     }
 
     override fun onEmailEmpty() {
-        viewBinding?.layoutEmail?.error = getString(R.string.empty_email)
-        viewBinding?.email?.requestFocus()
+        viewBinding.layoutEmail.error = getString(R.string.empty_email)
+        viewBinding.email.requestFocus()
     }
 
     override fun onEmailInvalid() {
-        viewBinding?.layoutEmail?.error = getString(R.string.invalid_email)
-        viewBinding?.email?.requestFocus()
+        viewBinding.layoutEmail.error = getString(R.string.invalid_email)
+        viewBinding.email.requestFocus()
     }
 
     override fun onPasswordEmpty() {
-        viewBinding?.layoutPassword?.error = getString(R.string.pass_empty)
-        viewBinding?.password?.requestFocus()
+        viewBinding.layoutPassword.error = getString(R.string.pass_empty)
+        viewBinding.password.requestFocus()
     }
 
     override fun onLoginSuccess(user: User) {
-        pageListener.authenticateSuccess(user)
+//        pageListener.authenticateSuccess(user)
+        val user = FirebaseAuth.getInstance()
+        if (user.currentUser!=null) {
+            replaceFragment(parentFragmentManager, MainFragment(), false)
+        }else{
+            viewBinding.logFragment.showsnackBar("You are loh")
+        }
     }
 
     override fun onLoginFailed(error: String?) {
-        view?.showsnackBar(getString(R.string.log_fail))
+        viewBinding.logFragment.showsnackBar(getString(R.string.log_fail))
+    }
+
+    override fun userLoggedIn() {
+        val auth = FirebaseAuth.getInstance()
+        if (auth.currentUser == null) {
+            replaceFragment(parentFragmentManager, MainFragment(), false)
+        }
+
+    }
+
+
+    override fun userNotFound() {
+        viewBinding.logFragment.showsnackBar("User not found")
     }
 
 
 }
+
+

@@ -36,4 +36,6 @@
     <string name="ref_fail">Registration failed</string>
     <string name="logout_succ">Logout succeed</string>
     <string name="logout_failed">Logout failed</string>
+    <string name="already_register_login_here">Already Register ? Login Here !</string>
+    <string name="user_reg">User was registered</string>
 </resources>

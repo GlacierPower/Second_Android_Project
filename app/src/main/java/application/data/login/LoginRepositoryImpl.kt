@@ -1,6 +1,5 @@
 package application.data.login
 
-import android.util.Log
 import application.data.AuthRepositoryCallBack
 import application.domain.login.LoginRepository
 import application.model.User
@@ -12,27 +11,20 @@ class LoginRepositoryImpl @Inject constructor() : LoginRepository {
     override fun loginUser(
         user: User,
         listener: AuthRepositoryCallBack,
-        auth: FirebaseAuth,
+        auth: FirebaseAuth
     ) {
-        val emailVerify = FirebaseAuth.getInstance().currentUser
-        if (emailVerify?.isEmailVerified == false) {
-            Log.w("Check", "Email verified")
-            auth
-                .signInWithEmailAndPassword(user.email as String, user.password as String)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val userID = task.result?.user?.uid
 
-                    } else {
-                        listener.fail(task.exception?.message)
-                    }
+        auth
+            .signInWithEmailAndPassword(user.email as String, user.password as String)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val userId = it.result?.user?.uid
+                    listener.success(user)
+                } else {
+                    listener.fail(it.exception?.message)
                 }
-        } else {
-            Log.w("Error", "Email didn't verify")
-        }
+            }
     }
-
-
 }
 
 
