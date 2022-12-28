@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import application.model.User
+import application.presentation.login.LoginFragment
 import application.untils.AppConstants.showsnackBar
-import com.google.firebase.auth.FirebaseAuth
+import application.untils.NavigationOnFragment.replaceFragment
 import com.zhenya_flower.firstlesson_kotlin.R
 import com.zhenya_flower.firstlesson_kotlin.databinding.FragmentForgotPassBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +40,7 @@ class ForgotPassFragment : Fragment(), ForgotPassView {
             val user = User(
                 email = viewBinding.emailForfot.text.toString().trim()
             )
-           forgotPassPresenter.doReset(user)
+            forgotPassPresenter.doReset(user)
         }
         super.onViewCreated(view, savedInstanceState)
     }
@@ -56,6 +57,11 @@ class ForgotPassFragment : Fragment(), ForgotPassView {
 
     override fun onResetSuccess(user: User) {
         viewBinding.forgotPass.showsnackBar(getString(R.string.reset_suc))
+        replaceFragment(
+            parentFragmentManager,
+            LoginFragment(),
+            false
+        )
     }
 
     override fun onResetFailed(error: String?) {
