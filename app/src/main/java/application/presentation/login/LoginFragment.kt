@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import application.model.User
-import application.presentation.AuthenticationPageListener
+import application.presentation.MainFragment
 import application.presentation.forgot_pass.ForgotPassFragment
-import application.presentation.logout.MainFragment
 import application.presentation.registration.RegistrationFragment
 import application.untils.AppConstants.showsnackBar
 import application.untils.NavigationOnFragment.replaceFragment
@@ -24,8 +23,6 @@ class LoginFragment : Fragment(), LoginView {
 
     private var _viewBinding: FragmentLoginBinding? = null
     private val viewBinding get() = _viewBinding!!
-
-    private lateinit var pageListener: AuthenticationPageListener
 
     @Inject
     lateinit var loginPresenter: LoginPresenter
@@ -96,12 +93,9 @@ class LoginFragment : Fragment(), LoginView {
     }
 
     override fun onLoginSuccess(user: User) {
-//        pageListener.authenticateSuccess(user)
-        val user = FirebaseAuth.getInstance()
-        if (user.currentUser!=null) {
+        val auth = FirebaseAuth.getInstance()
+        if (auth.currentUser != null) {
             replaceFragment(parentFragmentManager, MainFragment(), false)
-        }else{
-            viewBinding.logFragment.showsnackBar("You are loh")
         }
     }
 
@@ -109,17 +103,8 @@ class LoginFragment : Fragment(), LoginView {
         viewBinding.logFragment.showsnackBar(getString(R.string.log_fail))
     }
 
-    override fun userLoggedIn() {
-        val auth = FirebaseAuth.getInstance()
-        if (auth.currentUser == null) {
-            replaceFragment(parentFragmentManager, MainFragment(), false)
-        }
-
-    }
-
-
     override fun userNotFound() {
-        viewBinding.logFragment.showsnackBar("User not found")
+        viewBinding.logFragment.showsnackBar(getString(R.string.user_not_found))
     }
 
 

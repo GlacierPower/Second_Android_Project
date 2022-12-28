@@ -38,4 +38,6 @@
     <string name="logout_failed">Logout failed</string>
     <string name="already_register_login_here">Already Register ? Login Here !</string>
     <string name="user_reg">User was registered</string>
+    <string name="res_Fail">Reset Failed</string>
+    <string name="reset_suc">\"Reset success \"</string>
 </resources>

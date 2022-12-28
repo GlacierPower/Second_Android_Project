@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import application.model.User
-import application.presentation.AuthenticationPageListener
 import application.presentation.login.LoginFragment
 import application.untils.AppConstants.hideSoftInput
 import application.untils.AppConstants.showsnackBar
@@ -19,9 +18,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment(), RegisterView {
-
-
-    private lateinit var pageListener: AuthenticationPageListener
 
     @Inject
     lateinit var registerPresenter: RegisterPresenter
@@ -98,7 +94,7 @@ class RegistrationFragment : Fragment(), RegisterView {
 
     override fun onProgress(visibility: Int) {
         viewBinding.loading.visibility = visibility
-        replaceFragment(parentFragmentManager,LoginFragment(),true)
+        replaceFragment(parentFragmentManager, LoginFragment(), true)
     }
 
 

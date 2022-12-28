@@ -10,6 +10,5 @@ interface LoginView {
     fun onPasswordEmpty()
     fun onLoginSuccess(user:User)
     fun onLoginFailed(error: String?)
-    fun userLoggedIn()
     fun userNotFound()
 }

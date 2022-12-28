@@ -1,6 +1,7 @@
 package application.di
 
-import androidx.fragment.app.FragmentManager
+import application.domain.forgot_pass.ForgotPassInteractor
+import application.domain.forgot_pass.ForgotPassRepository
 import application.domain.login.LoginInteractor
 import application.domain.login.LoginRepository
 import application.domain.registration.RegistrationInteractor
@@ -24,10 +25,16 @@ class DomainModule {
     @Provides
     fun provideRegistrationRepository(
         registrationRepository: RegistrationRepository
-    ): RegistrationInteractor{
+    ): RegistrationInteractor {
         return RegistrationInteractor(registrationRepository)
     }
 
+    @Provides
+    fun provideForgotPasswordRepository(
+        forgotPassRepository: ForgotPassRepository
+    ): ForgotPassInteractor {
+       return ForgotPassInteractor(forgotPassRepository)
+    }
 
 
 }

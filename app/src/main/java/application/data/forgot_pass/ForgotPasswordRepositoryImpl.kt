@@ -12,7 +12,9 @@ class ForgotPasswordRepositoryImpl @Inject constructor() : ForgotPassRepository 
             .sendPasswordResetEmail(user.email as String)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                }
+                    listener.success(user)
+                } else
+                    listener.fail(task.exception?.message)
             }
     }
 }

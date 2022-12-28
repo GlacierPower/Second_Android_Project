@@ -1,34 +1,40 @@
 package application.presentation.forgot_pass
 
-import android.view.View
 import application.data.AuthRepositoryCallBack
-import application.data.forgot_pass.ForgotPasswordRepositoryImpl
 import application.domain.forgot_pass.ForgotPassInteractor
-import application.domain.login.LoginInteractor
 import application.model.User
+import application.untils.AppConstants.isEmailValid
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
 
-class ForgotPassPresenter@Inject constructor(
+class ForgotPassPresenter @Inject constructor(
     private val forgotPassInteractor: ForgotPassInteractor
-)  {
-    private var view: ForgotPassView? = null
+) {
+
+    lateinit var forgotPassView: ForgotPassView
+
+    fun setView(forgotPassFragment: ForgotPassFragment) {
+        forgotPassView = forgotPassFragment
+    }
+
     fun doReset(user: User) {
-        if (user.email?.isEmpty() == true) {
-            view?.onEmailEmpty()
+        if (user.email.isNullOrEmpty()) {
+            forgotPassView.onEmailEmpty()
+            return
+        }
+        if (user.email?.isEmailValid() == false) {
+            forgotPassView.onEmailInvalid()
             return
         }
         forgotPassInteractor.forgotPassword(user, object :
             AuthRepositoryCallBack {
             override fun success(user: User) {
-                view?.onResetSuccess(user)
-                view?.onProgress(View.VISIBLE)
+                forgotPassView.onResetSuccess(user)
             }
 
             override fun fail(error: String?) {
-                view?.onResetFailed(error)
-                view?.onProgress(View.VISIBLE)
+                forgotPassView.onResetFailed(error)
             }
 
         }, FirebaseAuth.getInstance())

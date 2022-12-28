@@ -1,4 +1,4 @@
-package application.presentation.logout
+package application.presentation
 
 import android.os.Bundle
 import android.view.*
@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import application.data.logout.LogoutRepositoryImpl
 import application.domain.logout.LogoutInteractor
 import application.presentation.login.LoginFragment
+import application.presentation.logout.LogoutPresenter
+import application.presentation.logout.LogoutView
 import application.untils.AppConstants.showsnackBar
 import application.untils.NavigationOnFragment.replaceFragment
 import com.google.firebase.auth.FirebaseAuth

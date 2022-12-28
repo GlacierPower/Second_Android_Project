@@ -16,12 +16,11 @@ class LoginRepositoryImpl @Inject constructor() : LoginRepository {
 
         auth
             .signInWithEmailAndPassword(user.email as String, user.password as String)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val userId = it.result?.user?.uid
+            .addOnCompleteListener {task->
+                if (task.isSuccessful) {
                     listener.success(user)
                 } else {
-                    listener.fail(it.exception?.message)
+                    listener.fail(task.exception?.message)
                 }
             }
     }
