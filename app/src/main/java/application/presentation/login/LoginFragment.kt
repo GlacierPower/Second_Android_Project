@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import application.model.User
-import application.presentation.main_fragment.MainFragment
 import application.presentation.forgot_pass.ForgotPassFragment
-import application.presentation.home.ItemsFragment
+import application.presentation.items.ItemsFragment
 import application.presentation.registration.RegistrationFragment
 import application.untils.AppConstants.isEmailValid
 import application.untils.AppConstants.showsnackBar

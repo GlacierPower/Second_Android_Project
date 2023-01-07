@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import application.presentation.home.ItemsFragment
-import application.presentation.main_fragment.MainFragment
+import application.presentation.items.ItemsFragment
 import application.presentation.login.LoginFragment
 import application.untils.NavigationOnFragment.replaceFragment
 import com.zhenya_flower.firstlesson_kotlin.R

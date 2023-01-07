@@ -1,4 +1,4 @@
-package application.presentation.home
+package application.presentation.items
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -83,7 +83,7 @@ class ItemsFragment : Fragment(), ItemsListener {
                         Snackbar.LENGTH_LONG
                     )
                         .setAction(
-                            "Undo",
+                            getString(R.string.undo),
                             View.OnClickListener {
                                 itemsList.add(position, deletePlayer)
                                 itemsAdapter.notifyItemInserted(position)

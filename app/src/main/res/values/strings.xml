@@ -45,4 +45,5 @@
     <string name="date">Date</string>
     <string name="image_view">Image view was clicked</string>
     <string name="was_clicked">Was clicked</string>
+    <string name="undo">Undo</string>
 </resources>

@@ -1,4 +1,4 @@
-package application.presentation.home
+package application.presentation.items
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
