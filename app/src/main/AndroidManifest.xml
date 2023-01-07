@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FirstLesson_Kotlin"
         tools:targetApi="31">
         <activity
-            android:name="application.presentation.MainActivity"
+            android:name="application.presentation.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

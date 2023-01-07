@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 
 object AppConstants {
@@ -18,5 +17,6 @@ object AppConstants {
     }
 
     fun String.isEmailValid() = this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
 
 }

@@ -13,7 +13,7 @@ class RegistrationInteractor @Inject constructor(
         listener: AuthRepositoryCallBack,
         auth: FirebaseAuth
     ) {
-        registrationRepository.registerUser(user, auth, listener)
+        registrationRepository.registerUser(user,listener,auth)
     }
 
 }

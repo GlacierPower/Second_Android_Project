@@ -5,27 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import application.model.User
-import application.presentation.MainFragment
+import application.presentation.main_fragment.MainFragment
 import application.presentation.forgot_pass.ForgotPassFragment
+import application.presentation.home.ItemsFragment
 import application.presentation.registration.RegistrationFragment
+import application.untils.AppConstants.isEmailValid
 import application.untils.AppConstants.showsnackBar
 import application.untils.NavigationOnFragment.replaceFragment
-import com.google.firebase.auth.FirebaseAuth
 import com.zhenya_flower.firstlesson_kotlin.R
 import com.zhenya_flower.firstlesson_kotlin.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class LoginFragment : Fragment(), LoginView {
+class LoginFragment : Fragment() {
+
+    private val viewModel: LoginViewModel by viewModels()
 
     private var _viewBinding: FragmentLoginBinding? = null
     private val viewBinding get() = _viewBinding!!
-
-    @Inject
-    lateinit var loginPresenter: LoginPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,16 +38,23 @@ class LoginFragment : Fragment(), LoginView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loginPresenter.setView(this)
-
         viewBinding.btnLogin.setOnClickListener {
             val user = User(
                 email = viewBinding.email.text.toString().trim(),
                 password = viewBinding.password.text.toString().trim()
             )
-
-            loginPresenter.doLogin(user)
-
+            if (validation(user)) {
+                viewModel.loginUser(user)
+            } else {
+                view.showsnackBar(getString(R.string.log_fail))
+            }
+        }
+        viewModel.nav.observe(viewLifecycleOwner) {
+            replaceFragment(
+                parentFragmentManager,
+                ItemsFragment(),
+                false
+            )
         }
         viewBinding.signUp.setOnClickListener {
             singUp()
@@ -77,36 +84,26 @@ class LoginFragment : Fragment(), LoginView {
         )
     }
 
-    override fun onEmailEmpty() {
-        viewBinding.layoutEmail.error = getString(R.string.empty_email)
-        viewBinding.email.requestFocus()
-    }
-
-    override fun onEmailInvalid() {
-        viewBinding.layoutEmail.error = getString(R.string.invalid_email)
-        viewBinding.email.requestFocus()
-    }
-
-    override fun onPasswordEmpty() {
-        viewBinding.layoutPassword.error = getString(R.string.pass_empty)
-        viewBinding.password.requestFocus()
-    }
-
-    override fun onLoginSuccess(user: User) {
-        val auth = FirebaseAuth.getInstance()
-        if (auth.currentUser != null) {
-            replaceFragment(parentFragmentManager, MainFragment(), false)
+    private fun validation(user: User): Boolean {
+        var isValid = true
+        if (user.email.isNullOrEmpty()) {
+            isValid = false
+            viewBinding.layoutEmail.error = getString(R.string.empty_email)
         }
+        if (user.email?.isEmailValid() == false) {
+            isValid = false
+            viewBinding.layoutEmail.error = getString(R.string.invalid_email)
+        }
+        if (user.password.isNullOrEmpty()) {
+            isValid = false
+            viewBinding.layoutPassword.error = getString(R.string.pass_empty)
+        }
+        if ((user.password?.length ?: 0) < 6) {
+            isValid = false
+            viewBinding.layoutPassword.error = getString(R.string.pass_short)
+        }
+        return isValid
     }
-
-    override fun onLoginFailed(error: String?) {
-        viewBinding.logFragment.showsnackBar(getString(R.string.log_fail))
-    }
-
-    override fun userNotFound() {
-        viewBinding.logFragment.showsnackBar(getString(R.string.user_not_found))
-    }
-
 
 }
 

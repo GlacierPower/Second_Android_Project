@@ -5,23 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import application.model.User
 import application.presentation.login.LoginFragment
+import application.untils.AppConstants.isEmailValid
 import application.untils.AppConstants.showsnackBar
 import application.untils.NavigationOnFragment.replaceFragment
 import com.zhenya_flower.firstlesson_kotlin.R
 import com.zhenya_flower.firstlesson_kotlin.databinding.FragmentForgotPassBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class ForgotPassFragment : Fragment(), ForgotPassView {
+class ForgotPassFragment : Fragment() {
+
+    private val viewModel: ForgotPassViewModel by viewModels()
 
     private var _viewBinding: FragmentForgotPassBinding? = null
     private val viewBinding get() = _viewBinding!!
-
-    @Inject
-    lateinit var forgotPassPresenter: ForgotPassPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,40 +32,37 @@ class ForgotPassFragment : Fragment(), ForgotPassView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        forgotPassPresenter.setView(this)
-
-
+        super.onViewCreated(view, savedInstanceState)
         viewBinding.btnForgot.setOnClickListener {
             val user = User(
                 email = viewBinding.emailForfot.text.toString().trim()
             )
-            forgotPassPresenter.doReset(user)
+            if (validation(user)) {
+                viewModel.resetPass(user)
+                view.showsnackBar(getString(R.string.reset_suc))
+            }
         }
-        super.onViewCreated(view, savedInstanceState)
+        viewModel.nav.observe(viewLifecycleOwner) {
+            replaceFragment(
+                parentFragmentManager,
+                LoginFragment(),
+                false
+            )
+        }
     }
 
-    override fun onEmailEmpty() {
-        viewBinding.layoutEmailForgot.error = getString(R.string.empty_email)
-        viewBinding.forgotPass.requestFocus()
+    fun validation(user: User): Boolean {
+        var isValid = true
+        if (user.email.isNullOrEmpty()) {
+            isValid = false
+            viewBinding.layoutEmailForgot.error = getString(R.string.empty_email)
+        }
+        if (user.email?.isEmailValid() == false) {
+            isValid = false
+            viewBinding.layoutEmailForgot.error = getString(R.string.invalid_email)
+        }
+        return isValid
     }
 
-    override fun onEmailInvalid() {
-        viewBinding.layoutEmailForgot.error = getString(R.string.invalid_email)
-        viewBinding.forgotPass.requestFocus()
-    }
-
-    override fun onResetSuccess(user: User) {
-        viewBinding.forgotPass.showsnackBar(getString(R.string.reset_suc))
-        replaceFragment(
-            parentFragmentManager,
-            LoginFragment(),
-            false
-        )
-    }
-
-    override fun onResetFailed(error: String?) {
-        viewBinding.forgotPass.showsnackBar(getString(R.string.res_Fail))
-    }
 
 }

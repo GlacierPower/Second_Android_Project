@@ -10,7 +10,7 @@ class RegisterRepositoryImpl @Inject constructor(
 
 ) : RegistrationRepository {
 
-    override fun registerUser(user: User, auth: FirebaseAuth, listener: AuthRepositoryCallBack) {
+    override fun registerUser(user: User, listener: AuthRepositoryCallBack, auth: FirebaseAuth) {
         auth
             .createUserWithEmailAndPassword(user.email as String, user.password as String)
             .addOnCompleteListener { task ->
