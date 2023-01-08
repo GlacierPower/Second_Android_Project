@@ -1,12 +1,12 @@
 package application.di
 
 import application.data.forgot_pass.ForgotPasswordRepositoryImpl
+import application.data.items.ItemsRepositoryImpl
 import application.data.login.LoginRepositoryImpl
-import application.data.logout.LogoutRepositoryImpl
 import application.data.registration.RegisterRepositoryImpl
 import application.domain.forgot_pass.ForgotPassRepository
+import application.domain.items.ItemsRepository
 import application.domain.login.LoginRepository
-import application.domain.logout.LogoutRepository
 import application.domain.registration.RegistrationRepository
 import dagger.Binds
 import dagger.Module
@@ -25,11 +25,15 @@ abstract class DataModule {
     @Binds
     abstract fun bindRegisterRepository(
         registerRepositoryImpl: RegisterRepositoryImpl
-    ):RegistrationRepository
+    ): RegistrationRepository
 
     @Binds
-    abstract  fun bindForgotPassword(
-        forgotPassRepositoryImpl:ForgotPasswordRepositoryImpl
-    ):ForgotPassRepository
+    abstract fun bindForgotPassword(
+        forgotPassRepositoryImpl: ForgotPasswordRepositoryImpl
+    ): ForgotPassRepository
 
+    @Binds
+    abstract fun bindItemsRepository(
+        itemsRepositoryImpl: ItemsRepositoryImpl
+    ): ItemsRepository
 }

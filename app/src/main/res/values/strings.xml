@@ -40,4 +40,8 @@
     <string name="user_reg">User was registered</string>
     <string name="res_Fail">Reset Failed</string>
     <string name="reset_suc">Reset success, check your email"</string>
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+    <string name="image_was_clicked">Image view clicked</string>
+    <string name="iv_clicked">Image was clicked</string>
 </resources>

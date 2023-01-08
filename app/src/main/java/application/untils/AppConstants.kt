@@ -19,4 +19,8 @@ object AppConstants {
 
     fun String.isEmailValid() = this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
+    const val NAME = "name"
+    const val DATE = "date"
+    const val IMAGE_VIEW = "image_view"
+
 }

@@ -2,6 +2,7 @@ package application.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import application.presentation.home.ItemsFragment
 import application.presentation.login.LoginFragment
 import application.untils.NavigationOnFragment.replaceFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity(), MainActivityView {
         if (auth.currentUser != null) {
             replaceFragment(
                 supportFragmentManager,
-                MainFragment(),
+                ItemsFragment(),
                 false
             )
         } else
