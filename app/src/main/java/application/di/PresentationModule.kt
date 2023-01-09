@@ -1,7 +1,9 @@
 package application.di
 
 import application.domain.login.LoginInteractor
+import application.domain.logout.MainFragmentInteractor
 import application.presentation.MainActivityPresenter
+import application.presentation.main_fragment.MainFragmentPresenter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +17,14 @@ class PresentationModule {
     @Provides
     fun provideMainActivityPresentation(
         loginInteractor: LoginInteractor
-    ):MainActivityPresenter{
-        return  MainActivityPresenter(loginInteractor)
+    ): MainActivityPresenter {
+        return MainActivityPresenter(loginInteractor)
+    }
+
+    @Provides
+    fun provideMainFragmentPresentation(
+        mainFragmentInteractor: MainFragmentInteractor
+    ): MainFragmentPresenter {
+        return MainFragmentPresenter(mainFragmentInteractor)
     }
 }

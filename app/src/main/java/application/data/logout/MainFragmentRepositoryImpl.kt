@@ -1,10 +1,10 @@
 package application.data.logout
 
-import application.domain.logout.LogoutRepository
+import application.domain.logout.MainFragmentRepository
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
-class LogoutRepositoryImpl @Inject constructor():LogoutRepository
+class MainFragmentRepositoryImpl @Inject constructor():MainFragmentRepository
      {
          override fun logOut(auth: FirebaseAuth) {
              auth

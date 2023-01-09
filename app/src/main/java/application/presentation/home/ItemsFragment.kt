@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import application.model.ItemsModel
-import application.presentation.MainFragment
+import application.presentation.main_fragment.MainFragment
 import application.presentation.adapter.ItemsAdapter
 import application.presentation.adapter.listener.ItemsListener
 import application.untils.AppConstants.DATE

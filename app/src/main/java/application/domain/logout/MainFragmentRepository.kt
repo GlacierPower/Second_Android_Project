@@ -2,7 +2,7 @@ package application.domain.logout
 
 import com.google.firebase.auth.FirebaseAuth
 
-interface LogoutRepository {
+interface MainFragmentRepository {
     fun logOut(
         auth: FirebaseAuth
     )

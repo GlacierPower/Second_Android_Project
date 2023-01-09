@@ -1,35 +1,28 @@
-package application.presentation
+package application.presentation.main_fragment
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import application.data.logout.LogoutRepositoryImpl
-import application.domain.logout.LogoutInteractor
 import application.presentation.login.LoginFragment
-import application.presentation.logout.LogoutPresenter
-import application.presentation.logout.LogoutView
+import application.untils.AppConstants.DATE
+import application.untils.AppConstants.IMAGE_VIEW
+import application.untils.AppConstants.NAME
 import application.untils.AppConstants.showsnackBar
 import application.untils.NavigationOnFragment.replaceFragment
-import com.google.firebase.auth.FirebaseAuth
 import com.zhenya_flower.firstlesson_kotlin.R
 import com.zhenya_flower.firstlesson_kotlin.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment : Fragment(), LogoutView {
+class MainFragment : Fragment(), MainView {
 
-    private lateinit var logoutPresenter: LogoutPresenter
+    @Inject
+    lateinit var mainFragmentPresenter: MainFragmentPresenter
 
     private var _viewBinding: FragmentMainBinding? = null
     private val viewBinding get() = _viewBinding!!
 
-    override fun onStart() {
-        super.onStart()
-        val auth = FirebaseAuth.getInstance()
-        val mUser = auth.currentUser
-        viewBinding.tvEmail.text = mUser?.email
-        viewBinding.tvEmailVerifiied.text = mUser?.isEmailVerified.toString()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,12 +38,18 @@ class MainFragment : Fragment(), LogoutView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        logoutPresenter = LogoutPresenter(
-            LogoutInteractor(
-                LogoutRepositoryImpl()
-            )
-        )
         super.onViewCreated(view, savedInstanceState)
+
+        mainFragmentPresenter.setView(this)
+
+        val bundle = arguments
+        bundle?.let { safeBundle ->
+            mainFragmentPresenter.getArguments(
+                safeBundle.getString(NAME),
+                safeBundle.getString(DATE),
+                safeBundle.getInt(IMAGE_VIEW)
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -60,7 +59,7 @@ class MainFragment : Fragment(), LogoutView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.log_out) {
-            logoutPresenter.logOut()
+            mainFragmentPresenter.logOut()
             replaceFragment(
                 parentFragmentManager,
                 LoginFragment(),
@@ -76,6 +75,12 @@ class MainFragment : Fragment(), LogoutView {
 
     override fun onLogoutFailed(error: String?) {
         view?.showsnackBar(getString(R.string.logout_failed))
+    }
+
+    override fun displayItemData(name: String, date: String, image: Int) {
+        viewBinding.nameTV.text = name
+        viewBinding.dateTV.text = date
+        viewBinding.detailIV.setBackgroundResource(image)
     }
 
 }

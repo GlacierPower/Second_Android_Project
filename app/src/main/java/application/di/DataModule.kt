@@ -3,10 +3,12 @@ package application.di
 import application.data.forgot_pass.ForgotPasswordRepositoryImpl
 import application.data.items.ItemsRepositoryImpl
 import application.data.login.LoginRepositoryImpl
+import application.data.logout.MainFragmentRepositoryImpl
 import application.data.registration.RegisterRepositoryImpl
 import application.domain.forgot_pass.ForgotPassRepository
 import application.domain.items.ItemsRepository
 import application.domain.login.LoginRepository
+import application.domain.logout.MainFragmentRepository
 import application.domain.registration.RegistrationRepository
 import dagger.Binds
 import dagger.Module
@@ -36,4 +38,9 @@ abstract class DataModule {
     abstract fun bindItemsRepository(
         itemsRepositoryImpl: ItemsRepositoryImpl
     ): ItemsRepository
+
+    @Binds
+    abstract fun bindMainFragmentRepository(
+        mainFragmentRepositoryImpl: MainFragmentRepositoryImpl
+    ):MainFragmentRepository
 }

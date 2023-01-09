@@ -6,6 +6,8 @@ import application.domain.items.ItemsInteractor
 import application.domain.items.ItemsRepository
 import application.domain.login.LoginInteractor
 import application.domain.login.LoginRepository
+import application.domain.logout.MainFragmentInteractor
+import application.domain.logout.MainFragmentRepository
 import application.domain.registration.RegistrationInteractor
 import application.domain.registration.RegistrationRepository
 import dagger.Module
@@ -45,4 +47,10 @@ class DomainModule {
         return ItemsInteractor(itemsRepository)
     }
 
+    @Provides
+    fun provideMainFragmentRepository(
+        mainFragmentRepository: MainFragmentRepository
+    ): MainFragmentInteractor {
+        return MainFragmentInteractor(mainFragmentRepository)
+    }
 }

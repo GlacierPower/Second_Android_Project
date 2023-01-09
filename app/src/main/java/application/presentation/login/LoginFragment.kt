@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import application.model.User
-import application.presentation.MainFragment
+import application.presentation.main_fragment.MainFragment
 import application.presentation.forgot_pass.ForgotPassFragment
 import application.presentation.registration.RegistrationFragment
 import application.untils.AppConstants.showsnackBar
