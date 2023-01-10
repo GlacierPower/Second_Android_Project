@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 
 object AppConstants {
@@ -22,5 +21,5 @@ object AppConstants {
     const val NAME = "name"
     const val DATE = "date"
     const val IMAGE_VIEW = "image_view"
-
+    const val EXCEPTION = "Exception called"
 }

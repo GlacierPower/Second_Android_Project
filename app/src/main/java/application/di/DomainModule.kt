@@ -6,8 +6,8 @@ import application.domain.items.ItemsInteractor
 import application.domain.items.ItemsRepository
 import application.domain.login.LoginInteractor
 import application.domain.login.LoginRepository
-import application.domain.logout.MainFragmentInteractor
-import application.domain.logout.MainFragmentRepository
+import application.domain.main_fragment.MainFragmentInteractor
+import application.domain.main_fragment.MainFragmentRepository
 import application.domain.registration.RegistrationInteractor
 import application.domain.registration.RegistrationRepository
 import dagger.Module

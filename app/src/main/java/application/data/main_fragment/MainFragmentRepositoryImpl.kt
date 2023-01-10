@@ -1,12 +1,12 @@
-package application.data.logout
+package application.data.main_fragment
 
-import application.domain.logout.MainFragmentRepository
+import application.domain.main_fragment.MainFragmentRepository
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
 class MainFragmentRepositoryImpl @Inject constructor():MainFragmentRepository
      {
-         override fun logOut(auth: FirebaseAuth) {
+         override suspend fun logOut(auth: FirebaseAuth) {
              auth
                  .signOut()
          }

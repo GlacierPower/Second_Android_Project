@@ -69,11 +69,11 @@ class MainFragment : Fragment(), MainView {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onLogoutSuccess(success: String) {
+    override fun onLogoutSuccess() {
         view?.showsnackBar(getString(R.string.logout_succ))
     }
 
-    override fun onLogoutFailed(error: String?) {
+    override fun onLogoutFailed() {
         view?.showsnackBar(getString(R.string.logout_failed))
     }
 

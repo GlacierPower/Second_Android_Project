@@ -1,10 +1,14 @@
 package application.presentation.login
 
+import android.util.Log
+import android.view.View
 import application.data.AuthRepositoryCallBack
 import application.domain.login.LoginInteractor
 import application.model.User
+import application.untils.AppConstants.EXCEPTION
 import application.untils.AppConstants.isEmailValid
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 
@@ -18,34 +22,58 @@ class LoginPresenter @Inject constructor(
     }
 
     fun doLogin(user: User) {
+
+        val coroutinesExceptionHandler = CoroutineExceptionHandler { _, exceprion ->
+            Log.w(EXCEPTION, exceprion.toString())
+        }
+        CoroutineScope(Dispatchers.Main + coroutinesExceptionHandler).launch {
+            try {
+                if (validation(user)) {
+                    loginInteractor.loginUser(user, object : AuthRepositoryCallBack {
+                        override fun success(user: User) {
+                            loginView.onLoginSuccess(user)
+                            loginView.onProgress(View.VISIBLE)
+                        }
+
+                        override fun fail(error: String?) {
+                            loginView.onLoginFailed()
+                            loginView.onProgress(View.VISIBLE)
+
+                        }
+
+                    }, FirebaseAuth.getInstance())
+                }
+            } catch (e: Exception) {
+                loginView.onLoginFailed()
+            }
+            joinAll()
+            cancel()
+        }
+
+    }
+
+    private fun validation(user: User): Boolean {
+        var isValid = true
+
         if (user.email.isNullOrEmpty()) {
+            isValid = false
             loginView.onEmailEmpty()
-            return
+
         }
         if (user.email?.isEmailValid() == false) {
+            isValid = false
             loginView.onEmailInvalid()
-            return
         }
 
         if (user.password?.isEmpty() == true) {
+            isValid = false
             loginView.onPasswordEmpty()
-            return
         }
-
-        loginInteractor.loginUser(user, object : AuthRepositoryCallBack {
-            override fun success(user: User) {
-                loginView.onLoginSuccess(user)
-            }
-
-            override fun fail(error: String?) {
-                loginView.onLoginFailed(error)
-
-            }
-
-        }, FirebaseAuth.getInstance())
-
-
-
+        if ((user.password?.length ?: 0) < 6) {
+            isValid = false
+            loginView.onPasswordToShort()
+        }
+        return isValid
     }
 
 }

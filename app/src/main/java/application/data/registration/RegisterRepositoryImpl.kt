@@ -10,7 +10,11 @@ class RegisterRepositoryImpl @Inject constructor(
 
 ) : RegistrationRepository {
 
-    override fun registerUser(user: User, auth: FirebaseAuth, listener: AuthRepositoryCallBack) {
+    override suspend fun registerUser(
+        user: User,
+        auth: FirebaseAuth,
+        listener: AuthRepositoryCallBack
+    ) {
         auth
             .createUserWithEmailAndPassword(user.email as String, user.password as String)
             .addOnCompleteListener { task ->
@@ -25,11 +29,8 @@ class RegisterRepositoryImpl @Inject constructor(
                     auth.currentUser?.sendEmailVerification()
                         ?.addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-
-                            } else {
-
+                                listener.success(user)
                             }
-                            auth.signOut()
                         }
                 }
             }

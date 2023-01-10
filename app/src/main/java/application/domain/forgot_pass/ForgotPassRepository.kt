@@ -5,7 +5,7 @@ import application.model.User
 import com.google.firebase.auth.FirebaseAuth
 
 interface ForgotPassRepository {
-    fun forgotPass(
+     suspend fun forgotPass(
         user: User,
         listener : AuthRepositoryCallBack,
         auth: FirebaseAuth,

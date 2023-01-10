@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import application.model.User
-import application.presentation.main_fragment.MainFragment
 import application.presentation.forgot_pass.ForgotPassFragment
+import application.presentation.main_fragment.MainFragment
 import application.presentation.registration.RegistrationFragment
 import application.untils.AppConstants.showsnackBar
 import application.untils.NavigationOnFragment.replaceFragment
@@ -92,6 +92,15 @@ class LoginFragment : Fragment(), LoginView {
         viewBinding.password.requestFocus()
     }
 
+    override fun onPasswordToShort() {
+        viewBinding.layoutPassword.error = getString(R.string.pass_short)
+        viewBinding.layoutPassword.requestFocus()
+    }
+
+    override fun onProgress(visibility: Int) {
+        viewBinding.loading.visibility = visibility
+    }
+
     override fun onLoginSuccess(user: User) {
         val auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
@@ -99,15 +108,14 @@ class LoginFragment : Fragment(), LoginView {
         }
     }
 
-    override fun onLoginFailed(error: String?) {
+    override fun onLoginFailed() {
         viewBinding.logFragment.showsnackBar(getString(R.string.log_fail))
-    }
-
-    override fun userNotFound() {
-        viewBinding.logFragment.showsnackBar(getString(R.string.user_not_found))
     }
 
 
 }
+
+
+
 
 

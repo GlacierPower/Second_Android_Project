@@ -8,4 +8,6 @@ interface ItemsView {
     fun imageClicked(message: Int)
 
     fun itemClicked(bundleNavigation: NavigateWithBundle)
+
+    fun getDataFail()
 }

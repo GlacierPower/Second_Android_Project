@@ -2,10 +2,12 @@ package application.presentation.main_fragment
 
 interface MainView {
 
-    fun onLogoutSuccess(success :String)
+    fun onLogoutSuccess()
 
-    fun onLogoutFailed(error: String?)
+    fun onLogoutFailed()
 
     fun displayItemData(name: String, date: String, image: Int)
+
+
 
 }

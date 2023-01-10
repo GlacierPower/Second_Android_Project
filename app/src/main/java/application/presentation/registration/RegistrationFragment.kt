@@ -90,19 +90,21 @@ class RegistrationFragment : Fragment(), RegisterView {
     override fun onRegisterStart() {
         context?.hideSoftInput(viewBinding.emailRegister)
         viewBinding.btnRegistration.isEnabled = false
+        replaceFragment(parentFragmentManager, LoginFragment(), true)
+
     }
 
     override fun onProgress(visibility: Int) {
         viewBinding.loading.visibility = visibility
-        replaceFragment(parentFragmentManager, LoginFragment(), true)
     }
 
 
     override fun onRegisterSuccess() {
         viewBinding.rootView.showsnackBar(getString(R.string.user_reg))
+
     }
 
-    override fun onRegisterFailed(error: String?) {
+    override fun onRegisterFailed() {
         viewBinding.rootView.showsnackBar(getString(R.string.ref_fail))
         viewBinding.btnRegistration.isEnabled
     }

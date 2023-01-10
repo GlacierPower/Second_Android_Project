@@ -1,7 +1,10 @@
 package application.presentation.home
 
+import android.util.Log
 import application.domain.items.ItemsInteractor
+import application.untils.AppConstants.EXCEPTION
 import com.zhenya_flower.firstlesson_kotlin.R
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class ItemsPresenter @Inject constructor(
@@ -15,8 +18,19 @@ class ItemsPresenter @Inject constructor(
     }
 
     fun getItem() {
-        val items = itemsInteractor.getData()
-        itemsView.itemReceived(items)
+        val coroutinesExceptionHandler = CoroutineExceptionHandler { _, exceprion ->
+            Log.w(EXCEPTION, exceprion.toString())
+        }
+        CoroutineScope(Dispatchers.Main + coroutinesExceptionHandler).launch {
+            try {
+                val items = itemsInteractor.getData()
+                itemsView.itemReceived(items)
+            } catch (e: Exception) {
+                itemsView.getDataFail()
+            }
+            joinAll()
+            cancel()
+        }
     }
 
     fun imageViewClicked() {

@@ -6,7 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 interface RegistrationRepository {
 
-    fun registerUser(
+    suspend fun registerUser(
         user: User,
         auth: FirebaseAuth,
         listener :AuthRepositoryCallBack

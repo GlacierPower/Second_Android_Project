@@ -1,7 +1,5 @@
 package application.presentation.registration
 
-import application.model.User
-
 
 interface RegisterView {
     fun onUserNameEmpty()
@@ -14,5 +12,5 @@ interface RegisterView {
     fun onRegisterStart()
     fun onProgress(visibility: Int)
     fun onRegisterSuccess()
-    fun onRegisterFailed(error: String?)
+    fun onRegisterFailed()
 }

@@ -6,7 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 interface LoginRepository {
 
-    fun loginUser(
+   suspend fun loginUser(
         user: User,
         listener: AuthRepositoryCallBack,
         auth: FirebaseAuth,

@@ -1,7 +1,7 @@
 package application.di
 
 import application.domain.login.LoginInteractor
-import application.domain.logout.MainFragmentInteractor
+import application.domain.main_fragment.MainFragmentInteractor
 import application.presentation.MainActivityPresenter
 import application.presentation.main_fragment.MainFragmentPresenter
 import dagger.Module

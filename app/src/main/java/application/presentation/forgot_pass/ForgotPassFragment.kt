@@ -64,7 +64,7 @@ class ForgotPassFragment : Fragment(), ForgotPassView {
         )
     }
 
-    override fun onResetFailed(error: String?) {
+    override fun onResetFailed() {
         viewBinding.forgotPass.showsnackBar(getString(R.string.res_Fail))
     }
 

@@ -9,7 +9,7 @@ class LoginInteractor @Inject constructor(
     private val loginRepository: LoginRepository,
 
     ) {
-    fun loginUser(
+   suspend fun loginUser(
         user: User,
         listener: AuthRepositoryCallBack,
         auth: FirebaseAuth

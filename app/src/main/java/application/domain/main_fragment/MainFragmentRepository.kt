@@ -1,9 +1,9 @@
-package application.domain.logout
+package application.domain.main_fragment
 
 import com.google.firebase.auth.FirebaseAuth
 
 interface MainFragmentRepository {
-    fun logOut(
+    suspend fun logOut(
         auth: FirebaseAuth
     )
 }

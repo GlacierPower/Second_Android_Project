@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor() : LoginRepository {
 
-    override fun loginUser(
+    override suspend fun loginUser(
         user: User,
         listener: AuthRepositoryCallBack,
         auth: FirebaseAuth

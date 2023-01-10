@@ -9,7 +9,7 @@ import javax.inject.Inject
 class ForgotPassInteractor@Inject constructor(
     private val forgotPassRepository: ForgotPassRepository
     ) {
-    fun forgotPassword(
+    suspend fun forgotPassword(
         user: User,
         listener: AuthRepositoryCallBack,
         auth: FirebaseAuth

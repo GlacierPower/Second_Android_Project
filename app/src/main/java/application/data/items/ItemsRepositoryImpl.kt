@@ -3,11 +3,13 @@ package application.data.items
 import application.domain.items.ItemsRepository
 import application.model.ItemsModel
 import com.zhenya_flower.firstlesson_kotlin.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ItemsRepositoryImpl @Inject constructor() : ItemsRepository {
-    override fun getData(): List<ItemsModel> {
-        return listOf(
+    override suspend fun getData(): List<ItemsModel> = withContext(Dispatchers.IO) {
+        return@withContext listOf(
             ItemsModel(
                 "Novak Djokovic",
                 R.drawable.novak,
@@ -75,4 +77,6 @@ class ItemsRepositoryImpl @Inject constructor() : ItemsRepository {
             )
         )
     }
+
 }
+

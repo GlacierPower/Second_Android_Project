@@ -8,7 +8,7 @@ import javax.inject.Inject
 class RegistrationInteractor @Inject constructor(
     private val registrationRepository: RegistrationRepository
 ) {
-    fun registerUser(
+    suspend fun registerUser(
         user: User,
         listener: AuthRepositoryCallBack,
         auth: FirebaseAuth

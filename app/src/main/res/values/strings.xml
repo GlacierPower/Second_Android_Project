@@ -44,4 +44,10 @@
     <string name="date">Date</string>
     <string name="image_was_clicked">Image view clicked</string>
     <string name="iv_clicked">Image was clicked</string>
+    <string name="undo">Undo</string>
+    <string name="delete">Delete</string>
+    <string name="exception_called">Exception called</string>
+    <string name="no_name">No name</string>
+    <string name="no_date">No date</string>
+    <string name="fail_data">Failed to get data</string>
 </resources>

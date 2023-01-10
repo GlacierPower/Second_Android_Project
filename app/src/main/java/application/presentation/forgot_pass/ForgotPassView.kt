@@ -6,5 +6,5 @@ interface ForgotPassView {
     fun onEmailEmpty()
     fun onEmailInvalid()
     fun onResetSuccess(user: User)
-    fun onResetFailed(error: String?)
+    fun onResetFailed()
 }
