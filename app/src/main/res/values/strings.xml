@@ -50,4 +50,5 @@
     <string name="no_name">No name</string>
     <string name="no_date">No date</string>
     <string name="fail_data">Failed to get data</string>
+    <string name="have_to_agree_with_terms">You should agree with Terms</string>
 </resources>

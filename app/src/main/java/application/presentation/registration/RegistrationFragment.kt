@@ -38,14 +38,20 @@ class RegistrationFragment : Fragment(), RegisterView {
 
         registerPresenter.setView(this)
 
+
         viewBinding.btnRegistration.setOnClickListener {
-            val user = User(
-                email = viewBinding.emailRegister.text.toString().trim(),
-                username = viewBinding.userNameRegister.text.toString().trim(),
-                password = viewBinding.passwordRegister.text.toString().trim(),
-                confirmPassword = viewBinding.confirmPass.text.toString().trim()
-            )
-            registerPresenter.doRegister(user)
+            if (viewBinding.checkBox.isChecked) {
+                val user = User(
+                    email = viewBinding.emailRegister.text.toString().trim(),
+                    username = viewBinding.userNameRegister.text.toString().trim(),
+                    password = viewBinding.passwordRegister.text.toString().trim(),
+                    confirmPassword = viewBinding.confirmPass.text.toString().trim()
+                )
+                registerPresenter.doRegister(user)
+
+            } else {
+                view.showsnackBar(getString(R.string.have_to_agree_with_terms))
+            }
 
         }
 
